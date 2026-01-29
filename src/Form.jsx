@@ -34,10 +34,14 @@ const Form = () => {
   };
 
   return (
-    <div className="flex items-center justify-center w-full h-screen bg-slate-100">
-      <form onSubmit={handleSubmit} className="bg-slate-200 rounded-sm">
+    <div className="flex items-center bg-linear-to-r from-blue-400 to-purple-400 justify-center w-full h-screen bg-slate-100 backdrop-blur-sm inset-2">
+      <form
+        onSubmit={handleSubmit}
+        className=" flex flex-col rounded-sm max-w-sm w-full py-12 px-5 rounded-sm shadow-md backdrop-blur-sm"
+      >
         <input
           name="name"
+          className="w-full bg-transparent outline-none mb-5 border-b py-2 pl-1 pr-3 text-white cursor-pointer transition-all duration-500 ease-in-out outline-none focus:border-b-white/20 border-b-white/40 text-sm capitalize"
           value={formData.name}
           onChange={handleChange}
           placeholder="Admin Name.."
@@ -45,6 +49,7 @@ const Form = () => {
         />
         <input
           name="email"
+          className="w-full bg-transparent outline-none mb-5 border-b py-2 pl-1 pr-3 text-white cursor-pointer transition-all duration-500 ease-in-out outline-none focus:border-b-white/20 border-b-white/40 text-sm capitalize"
           value={formData.email}
           onChange={handleChange}
           type="email"
@@ -53,12 +58,18 @@ const Form = () => {
         />
         <textarea
           name="message"
+          className="w-full bg-transparent mb-5 border-b py-2 pl-1 pr-3 text-white cursor-pointer transition-all duration-500 ease-in-out outline-none focus:border-b-white/20 border-b-white/40 text-sm capitalize h-10"
           value={formData.message}
           onChange={handleChange}
           placeholder="Messages"
           required
         />
-        <button type="submit">Submit Now</button>
+        <button
+          type="submit"
+          className="text-black font-medium capitalize cursor-pointer transition-colors duration-500 ease-in-out bg-transparent hover:text-white underline py-2 rounded-sm hover:text-blue-400"
+        >
+          Submit Now
+        </button>
         <p>{status}</p>
       </form>
     </div>
