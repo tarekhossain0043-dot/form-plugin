@@ -34,32 +34,34 @@ const Form = () => {
   };
 
   return (
-    <form onSubmit={handleSubmit} className="bg-slate-200 rounded-sm">
-      <input
-        name="name"
-        value={formData.name}
-        onChange={handleChange}
-        placeholder="Admin Name.."
-        required
-      />
-      <input
-        name="email"
-        value={formData.email}
-        onChange={handleChange}
-        type="email"
-        placeholder="admin Email"
-        required
-      />
-      <textarea
-        name="message"
-        value={formData.message}
-        onChange={handleChange}
-        placeholder="Messages"
-        required
-      />
-      <button type="submit">Submit Now</button>
-      <p>{status}</p>
-    </form>
+    <div className="flex items-center justify-center w-full h-screen bg-slate-100">
+      <form onSubmit={handleSubmit} className="bg-slate-200 rounded-sm">
+        <input
+          name="name"
+          value={formData.name}
+          onChange={handleChange}
+          placeholder="Admin Name.."
+          required
+        />
+        <input
+          name="email"
+          value={formData.email}
+          onChange={handleChange}
+          type="email"
+          placeholder="admin Email"
+          required
+        />
+        <textarea
+          name="message"
+          value={formData.message}
+          onChange={handleChange}
+          placeholder="Messages"
+          required
+        />
+        <button type="submit">Submit Now</button>
+        <p>{status}</p>
+      </form>
+    </div>
   );
 };
 
