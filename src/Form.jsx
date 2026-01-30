@@ -70,7 +70,7 @@ const Form = () => {
         >
           Submit Now
         </button>
-        <p>{status}</p>
+        <p className="text-red-400 text-sm font-normal">{status}</p>
       </form>
     </div>
   );
