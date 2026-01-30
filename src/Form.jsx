@@ -18,7 +18,7 @@ const Form = () => {
     setStatus("Sending..");
 
     try {
-      const res = await axios.post("/wp-json/tcf/v1/submit", formData, {
+      const res = await axios.post("/wp-json/form_plugin/v1/form", formData, {
         headers: { "Content-Type": "application/json" },
       });
 
