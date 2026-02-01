@@ -19,9 +19,13 @@ const Form = () => {
     setStatus("Sending...");
 
     try {
-      const res = await axios.post("/wp-json/form_plugin/v1/form", formData, {
-        headers: { "Content-Type": "application/json" },
-      });
+      const res = await axios.post(
+        "http://form-plugin.local/wp-json/form_plugin/v1/form",
+        formData,
+        {
+          headers: { "Content-Type": "application/json" },
+        },
+      );
 
       if (res.data.success) {
         setStatus("send successfully!");
