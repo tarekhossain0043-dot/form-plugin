@@ -29,39 +29,41 @@ export default function SubmissionTable() {
 
   return (
     <div className="p-6 bg-white rounded-lg shadow-md">
-      <h2 className="text-2xl font-bold mb-4 text-gray-800">
-        Submissions Dashboard
-      </h2>
+      <div className="flex items-center justify-between mb-4">
+        <h2 className="text-3xl flex-1 w-full font-bold mb-4 text-gray-800">
+          Submissions Dashboard
+        </h2>
+        <div>
+          <input
+            type="text"
+            placeholder="Search by name or email..."
+            className="w-full px-4 py-3 shadow-sm text-sm rounded-sm outline-none focus:ring-2 focus:ring-blue-500 text-black"
+            onChange={(e) => {
+              setSearchTerm(e.target.value);
+              setCurrentPage(1); // সার্চ করলে আবার ১ম পেজে নিয়ে যাবে
+            }}
+          />
+        </div>
+      </div>
 
       {/* সার্চ বক্স */}
-      <div className="mb-4">
-        <input
-          type="text"
-          placeholder="Search by name or email..."
-          className="w-full p-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 text-black"
-          onChange={(e) => {
-            setSearchTerm(e.target.value);
-            setCurrentPage(1); // সার্চ করলে আবার ১ম পেজে নিয়ে যাবে
-          }}
-        />
-      </div>
 
       {/* টেবিল */}
       <table className="w-full text-left border-collapse">
         <thead className="bg-gray-100 text-gray-700">
           <tr>
-            <th className="p-3 border">Name</th>
-            <th className="p-3 border">Email</th>
-            <th className="p-3 border">Message</th>
+            <th className="p-3">Name</th>
+            <th className="p-3">Email</th>
+            <th className="p-3">Message</th>
           </tr>
         </thead>
         <tbody className="text-gray-600">
           {currentItems.length > 0 ? (
             currentItems.map((item) => (
               <tr key={item.id} className="hover:bg-gray-50">
-                <td className="p-3 border">{item.name}</td>
-                <td className="p-3 border">{item.email}</td>
-                <td className="p-3 border">{item.message}</td>
+                <td className="p-3">{item.name}</td>
+                <td className="p-3">{item.email}</td>
+                <td className="p-3">{item.message}</td>
               </tr>
             ))
           ) : (
