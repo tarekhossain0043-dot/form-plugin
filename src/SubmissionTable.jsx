@@ -5,7 +5,8 @@ export default function SubmissionTable() {
   const [data, setData] = useState([]);
   const [searchTerm, setSearchTerm] = useState("");
   const [currentPage, setCurrentPage] = useState(1);
-  const itemsPerPage = 5; // প্রতি পেজে কয়টি ডাটা দেখাবে
+  const [resendStatus, setResendStatus] = useState({ id: null, msg: "" });
+  const itemsPerPage = 5;
 
   useEffect(() => {
     axios
@@ -14,72 +15,106 @@ export default function SubmissionTable() {
       .catch((err) => console.error(err));
   }, []);
 
-  //  Searching
+  // ১. Resend Function
+  const handleResend = async (id) => {
+    setResendStatus({ id, msg: "Sending..." });
+    try {
+      // এই এন্ডপয়েন্টটি আপনার PHP তে আগে থেকেই থাকা লাগবে
+      const response = await axios.post(
+        `${window.location.origin}/wp-json/form_plugin/v1/resend/${id}`,
+      );
+      if (response.data.success) {
+        setResendStatus({ id, msg: "Sent! ✅" });
+      }
+    } catch (err) {
+      setResendStatus({ id, msg: "Failed ❌", err });
+    }
+    // ৩ সেকেন্ড পর স্ট্যাটাস মেসেজ সরিয়ে ফেলা
+    setTimeout(() => setResendStatus({ id: null, msg: "" }), 3000);
+  };
+
+  // ২. Search Logic
   const filteredData = data.filter(
     (item) =>
       item.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
       item.email.toLowerCase().includes(searchTerm.toLowerCase()),
   );
 
-  // Pagination
+  // ৩. Pagination Logic
   const indexOfLastItem = currentPage * itemsPerPage;
   const indexOfFirstItem = indexOfLastItem - itemsPerPage;
   const currentItems = filteredData.slice(indexOfFirstItem, indexOfLastItem);
   const totalPages = Math.ceil(filteredData.length / itemsPerPage);
 
   return (
-    <div className="p-6 bg-white rounded-lg shadow-md">
-      <div className="flex items-center justify-between mb-4">
-        <h2 className="text-3xl flex-1 w-full font-bold mb-4 text-gray-800">
-          Submissions Dashboard
+    <div className="p-6 bg-white rounded-lg shadow-md mt-2 mx-4">
+      <div className="flex items-center justify-between mb-2">
+        <h2 className="text-3xl flex-1 w-full font-bold text-gray-800">
+          Admin Submissions
         </h2>
+
+        {/* Search Box */}
         <div>
           <input
             type="text"
-            placeholder="Search by name or email..."
-            className="w-full px-4 py-3 shadow-sm text-sm rounded-sm outline-none focus:ring-2 focus:ring-blue-500 text-black"
+            placeholder="Search anythings..."
+            className="w-full p-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 text-black"
             onChange={(e) => {
               setSearchTerm(e.target.value);
-              setCurrentPage(1); // সার্চ করলে আবার ১ম পেজে নিয়ে যাবে
+              setCurrentPage(1);
             }}
           />
         </div>
       </div>
 
-      {/* সার্চ বক্স */}
-
-      {/* টেবিল */}
-      <table className="w-full text-left border-collapse">
-        <thead className="bg-gray-100 text-gray-700">
-          <tr>
-            <th className="p-3">Name</th>
-            <th className="p-3">Email</th>
-            <th className="p-3">Message</th>
-          </tr>
-        </thead>
-        <tbody className="text-gray-600">
-          {currentItems.length > 0 ? (
-            currentItems.map((item) => (
-              <tr key={item.id} className="hover:bg-gray-50">
-                <td className="p-3">{item.name}</td>
-                <td className="p-3">{item.email}</td>
-                <td className="p-3">{item.message}</td>
-              </tr>
-            ))
-          ) : (
+      {/* Table */}
+      <div className="overflow-x-auto">
+        <table className="w-full text-left border-collapse px-3 cursor-pointer text-sm">
+          <thead className="bg-black border-b border-slate-400 text-white">
             <tr>
-              <td colSpan="3" className="p-4 text-center">
-                No data found!
-              </td>
+              <th className="p-3">Name</th>
+              <th className="p-3">Email</th>
+              <th className="p-3">Message</th>
+              <th className="p-3">Action</th>
             </tr>
-          )}
-        </tbody>
-      </table>
+          </thead>
+          <tbody className="text-gray-800 text-sm font-medium border-collapse">
+            {currentItems.length > 0 ? (
+              currentItems.map((item) => (
+                <tr
+                  key={item.id}
+                  className="hover:bg-gray-100 border-b border-slate-100 transition-all duration-300 ease-in-out"
+                >
+                  <td className="p-3">{item.name}</td>
+                  <td className="p-3">{item.email}</td>
+                  <td className="p-3">"{item.message}"</td>
+                  <td className="p-3 text-right">
+                    <button
+                      onClick={() => handleResend(item.id)}
+                      className="bg-blue-500 truncate hover:bg-blue-600 text-white px-3 py-1 rounded text-sm font-semibold transition"
+                    >
+                      {resendStatus.id === item.id
+                        ? resendStatus.msg
+                        : "Resend Mail"}
+                    </button>
+                  </td>
+                </tr>
+              ))
+            ) : (
+              <tr>
+                <td colSpan="4" className="p-4 text-center text-gray-400">
+                  No submissions found.
+                </td>
+              </tr>
+            )}
+          </tbody>
+        </table>
+      </div>
 
-      {/* Pagination বাটন */}
-      <div className="flex justify-between items-center mt-4">
-        <span className="text-sm text-gray-600">
-          Showing {indexOfFirstItem + 1} to{" "}
+      {/* Pagination Controls */}
+      <div className="flex justify-between items-center mt-6">
+        <span className="text-sm text-gray-500 italic">
+          Showing {filteredData.length > 0 ? indexOfFirstItem + 1 : 0} to{" "}
           {Math.min(indexOfLastItem, filteredData.length)} of{" "}
           {filteredData.length} entries
         </span>
@@ -87,14 +122,14 @@ export default function SubmissionTable() {
           <button
             disabled={currentPage === 1}
             onClick={() => setCurrentPage((prev) => prev - 1)}
-            className="px-4 py-2 bg-gray-200 rounded disabled:opacity-50 text-black"
+            className="px-3 py-1 bg-gray-100 hover:bg-blue-900 border rounded  disabled:opacity-30 text-black"
           >
-            Previous
+            Prev
           </button>
           <button
-            disabled={currentPage === totalPages}
+            disabled={currentPage === totalPages || totalPages === 0}
             onClick={() => setCurrentPage((prev) => prev + 1)}
-            className="px-4 py-2 bg-blue-500 text-white rounded disabled:opacity-50"
+            className="px-3 py-2 hover:bg-blue-900 cursor-pointer transition-all duration-300 ease-in-out bg-gray-100 border rounded  disabled:opacity-30 text-black"
           >
             Next
           </button>
