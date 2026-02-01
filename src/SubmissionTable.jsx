@@ -78,7 +78,7 @@ export default function SubmissionTable() {
               <th className="p-3">Action</th>
             </tr>
           </thead>
-          <tbody className="text-gray-800 text-sm font-medium border-collapse">
+          <tbody className="text-gray-800 text-sm font-sm border-collapse">
             {currentItems.length > 0 ? (
               currentItems.map((item) => (
                 <tr
@@ -122,14 +122,14 @@ export default function SubmissionTable() {
           <button
             disabled={currentPage === 1}
             onClick={() => setCurrentPage((prev) => prev - 1)}
-            className="px-3 py-1 bg-gray-100 hover:bg-blue-900 border rounded  disabled:opacity-30 text-black"
+            className="px-3 py-1 bg-gray-100 hover:bg-blue-900 border rounded  disabled:opacity-30 disabled:cursor-not-allowed text-black"
           >
             Prev
           </button>
           <button
             disabled={currentPage === totalPages || totalPages === 0}
             onClick={() => setCurrentPage((prev) => prev + 1)}
-            className="px-3 py-2 hover:bg-blue-900 cursor-pointer transition-all duration-300 ease-in-out bg-gray-100 border rounded  disabled:opacity-30 text-black"
+            className="px-3 py-2 hover:bg-blue-900 cursor-pointer transition-all duration-300 ease-in-out  border rounded disabled:cursor-not-allowed  disabled:opacity-30 text-black"
           >
             Next
           </button>
