@@ -19,15 +19,14 @@ export default function SubmissionTable() {
   const handleResend = async (id) => {
     setResendStatus({ id, msg: "Sending..." });
     try {
-      // এই এন্ডপয়েন্টটি আপনার PHP তে আগে থেকেই থাকা লাগবে
       const response = await axios.post(
         `${window.location.origin}/wp-json/form_plugin/v1/resend/${id}`,
       );
       if (response.data.success) {
-        setResendStatus({ id, msg: "Sent! ✅" });
+        setResendStatus({ id, msg: "Senting!" });
       }
     } catch (err) {
-      setResendStatus({ id, msg: "Failed ❌", err });
+      setResendStatus({ id, msg: "Failed", err });
     }
     // ৩ সেকেন্ড পর স্ট্যাটাস মেসেজ সরিয়ে ফেলা
     setTimeout(() => setResendStatus({ id: null, msg: "" }), 3000);
