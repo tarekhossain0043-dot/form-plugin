@@ -13,14 +13,15 @@ const Form = () => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
   const [status, setStatus] = useState("");
+  const [isSuccess, setIsSucces] = useState(false);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     setStatus("Sending...");
-
+    setIsSucces(false);
     try {
       const res = await axios.post(
-        "http://form-plugin.local/wp-json/form_plugin/v1/form",
+        "http://form-plugin.local/wp-json/form_plugin/v1/form/",
         formData,
         {
           headers: { "Content-Type": "application/json" },
@@ -30,12 +31,15 @@ const Form = () => {
       if (res.data.success) {
         setStatus("send successfully!");
         setFormData({ name: "", email: "", message: "" }); // reset the form
+        setIsSucces(true);
       } else {
         setStatus(res.data.message || "Submission Lose try Again");
+        setIsSucces(false);
       }
     } catch (err) {
       console.error("Submission Failed :", err);
       setStatus("someing went wrong -- please try again");
+      setIsSucces(false);
     }
   };
 
@@ -43,11 +47,11 @@ const Form = () => {
     <div className="flex items-center bg-linear-to-r from-blue-400 to-purple-400 justify-center w-full h-screen bg-slate-100 backdrop-blur-sm inset-2">
       <form
         onSubmit={handleSubmit}
-        className=" flex flex-col rounded-sm max-w-sm w-full py-12 px-5 rounded-sm shadow-md backdrop-blur-sm"
+        className=" flex flex-col rounded-sm bg-slate-100 max-w-sm w-full py-12 px-5 rounded-sm shadow-md backdrop-blur-sm"
       >
         <input
           name="name"
-          className="w-full bg-transparent outline-none mb-5 border-b py-2 pl-1 pr-3 text-white cursor-pointer transition-all duration-500 ease-in-out outline-none focus:border-b-white/20 border-b-white/40 text-sm capitalize"
+          className="w-full bg-transparent outline-none mb-5 border-b  py-2 pl-1 pr-3 text-slate-700 cursor-pointer transition-all duration-500 ease-in-out outline-none focus:border-b-purple-500/20 border-b-purple-400/40 text-sm capitalize"
           value={formData.name}
           onChange={handleChange}
           placeholder="Admin Name.."
@@ -55,7 +59,7 @@ const Form = () => {
         />
         <input
           name="email"
-          className="w-full bg-transparent outline-none mb-5 border-b py-2 pl-1 pr-3 text-white cursor-pointer transition-all duration-500 ease-in-out outline-none focus:border-b-white/20 border-b-white/40 text-sm"
+          className="w-full bg-transparent outline-none mb-5 border-b  py-2 pl-1 pr-3 text-slate-700 cursor-pointer transition-all duration-500 ease-in-out outline-none focus:border-b-purple-500/20 border-b-purple-400/40 text-sm capitalize"
           value={formData.email}
           onChange={handleChange}
           type="email"
@@ -64,7 +68,7 @@ const Form = () => {
         />
         <textarea
           name="message"
-          className="w-full bg-transparent mb-5 border-b py-2 pl-1 pr-3 text-white cursor-pointer transition-all duration-500 ease-in-out outline-none focus:border-b-white/20 border-b-white/40 text-sm capitalize h-10"
+          className="w-full bg-transparent outline-none mb-5 border-b  py-2 pl-1 pr-3 text-slate-700 cursor-pointer transition-all duration-500 ease-in-out outline-none focus:border-b-purple-500/20 border-b-purple-400/40 text-sm capitalize"
           value={formData.message}
           onChange={handleChange}
           placeholder="Messages"
@@ -76,7 +80,11 @@ const Form = () => {
         >
           Submit Now
         </button>
-        <p className="text-red-400 text-sm font-normal">{status}</p>
+        <p
+          className={`${isSuccess ? "text-green-500" : "text-red-400"} text-sm font-normal`}
+        >
+          {status}
+        </p>
       </form>
     </div>
   );
