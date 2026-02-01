@@ -1,10 +1,13 @@
-import React from "react";
 import Form from "./Form";
+import SubmissionTable from "./SubmissionTable";
 
 export default function App() {
+  const isAdminPage = window.location.href.includes("page=form-submissions");
+
   return (
-    <div>
-      <Form />
+    <div className="tailwind-scope">
+      {" "}
+      {isAdminPage ? <SubmissionTable /> : <Form />}
     </div>
   );
 }
