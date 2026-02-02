@@ -48,7 +48,7 @@ export default function SubmissionTable() {
   return (
     <div className="p-6 bg-white rounded-lg shadow-md mt-2 mx-4">
       <div className="flex items-center justify-between mb-2">
-        <h2 className="text-3xl flex-1 w-full font-bold text-gray-800">
+        <h2 className="text-3xl font-bold text-gray-800">
           Admin Submissions Table
         </h2>
 
@@ -57,7 +57,7 @@ export default function SubmissionTable() {
           <input
             type="text"
             placeholder="Search anythings..."
-            className="w-full p-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 text-black"
+            className="max-w-md w-full p-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 text-black"
             onChange={(e) => {
               setSearchTerm(e.target.value);
               setCurrentPage(1);
