@@ -76,7 +76,7 @@ const Form = () => {
         />
         <button
           type="submit"
-          className="text-black font-medium capitalize cursor-pointer transition-colors duration-500 ease-in-out bg-transparent hover:text-white underline py-2 rounded-sm hover:text-blue-400"
+          className="text-black font-medium capitalize cursor-pointer transition-colors duration-500 ease-in-out bg-transparent hover:text-white underline py-2 rounded-sm hover:text-blue-400 outline-none focus:ring-1 focus:ring-blue-400"
         >
           Submit Now
         </button>
