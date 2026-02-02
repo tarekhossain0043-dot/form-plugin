@@ -59,7 +59,7 @@ const Form = () => {
         />
         <input
           name="email"
-          className="w-full bg-transparent outline-none mb-5 border-b  py-2 pl-1 pr-3 text-slate-700 cursor-pointer transition-all duration-500 ease-in-out outline-none focus:border-b-purple-500/20 border-b-purple-400/40 text-sm capitalize"
+          className="w-full bg-transparent outline-none mb-5 border-b  py-2 pl-1 pr-3 text-slate-700 cursor-pointer transition-all duration-500 ease-in-out outline-none focus:border-b-purple-500/20 border-b-purple-400/40 text-sm"
           value={formData.email}
           onChange={handleChange}
           type="email"
