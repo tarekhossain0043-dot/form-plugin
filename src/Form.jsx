@@ -54,7 +54,7 @@ const Form = () => {
           className="w-full bg-transparent outline-none mb-5 border-b  py-2 pl-1 pr-3 text-slate-700 cursor-pointer transition-all duration-500 ease-in-out outline-none focus:border-b-purple-500/20 border-b-purple-400/40 text-sm capitalize"
           value={formData.name}
           onChange={handleChange}
-          placeholder="Admin Name.."
+          placeholder="Name.."
           required
         />
         <input
@@ -63,7 +63,7 @@ const Form = () => {
           value={formData.email}
           onChange={handleChange}
           type="email"
-          placeholder="admin Email"
+          placeholder="Email"
           required
         />
         <textarea

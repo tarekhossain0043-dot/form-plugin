@@ -23,23 +23,23 @@ export default function SubmissionTable() {
         `${window.location.origin}/wp-json/form_plugin/v1/resend/${id}`,
       );
       if (response.data.success) {
-        setResendStatus({ id, msg: "Senting!" });
+        setResendStatus({ id, msg: "Sending!" });
       }
     } catch (err) {
       setResendStatus({ id, msg: "Failed", err });
     }
-    // ৩ সেকেন্ড পর স্ট্যাটাস মেসেজ সরিয়ে ফেলা
+    // after 3 seconds reset the message
     setTimeout(() => setResendStatus({ id: null, msg: "" }), 3000);
   };
 
-  // ২. Search Logic
+  // Search Logic
   const filteredData = data.filter(
     (item) =>
       item.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
       item.email.toLowerCase().includes(searchTerm.toLowerCase()),
   );
 
-  // ৩. Pagination Logic
+  // Pagination Logic
   const indexOfLastItem = currentPage * itemsPerPage;
   const indexOfFirstItem = indexOfLastItem - itemsPerPage;
   const currentItems = filteredData.slice(indexOfFirstItem, indexOfLastItem);
@@ -49,7 +49,7 @@ export default function SubmissionTable() {
     <div className="p-6 bg-white rounded-lg shadow-md mt-2 mx-4">
       <div className="flex items-center justify-between mb-2">
         <h2 className="text-3xl flex-1 w-full font-bold text-gray-800">
-          Admin Submissions
+          Admin Submissions Table
         </h2>
 
         {/* Search Box */}
@@ -66,7 +66,7 @@ export default function SubmissionTable() {
         </div>
       </div>
 
-      {/* Table */}
+      {/* Main Table */}
       <div className="overflow-x-auto">
         <table className="w-full text-left border-collapse px-3 cursor-pointer text-sm">
           <thead className="bg-black border-b border-slate-400 text-white">
