@@ -53,11 +53,11 @@ export default function SubmissionTable() {
         </h2>
 
         {/* Search Box */}
-        <div>
+        <div className="max-w-md w-full">
           <input
             type="text"
             placeholder="Search anythings..."
-            className="max-w-md w-full p-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 text-black"
+            className="w-full px-3 py-2 border-none shadow-sm cursor-pointer transition-all duration-300 ease-in-out rounded-sm focus:outline-none focus:ring-1 focus:ring-blue-500 text-black"
             onChange={(e) => {
               setSearchTerm(e.target.value);
               setCurrentPage(1);
@@ -69,7 +69,7 @@ export default function SubmissionTable() {
       {/* Main Table */}
       <div className="overflow-x-auto">
         <table className="w-full text-left border-collapse px-3 cursor-pointer text-sm">
-          <thead className="bg-black border-b border-slate-400 text-white">
+          <thead className="bg-black px-3 rounded-sm border-b border-slate-400 text-white">
             <tr>
               <th className="p-3">Name</th>
               <th className="p-3">Email</th>
