@@ -67,8 +67,8 @@ export default function SubmissionTable() {
       </div>
 
       {/* Main Table */}
-      <div className="overflow-x-auto">
-        <table className="w-full text-left border-collapse px-3 cursor-pointer text-sm">
+      <div className="overflow-x-auto rounded-sm">
+        <table className="w-full text-left border-collapse rounded-sm px-3 cursor-pointer text-sm">
           <thead className="bg-black px-3 rounded-sm border-b border-slate-400 text-white">
             <tr>
               <th className="p-3">Name</th>
