@@ -44,7 +44,7 @@ const Form = () => {
   };
 
   return (
-    <div className="flex items-center bg-linear-to-r from-blue-400 to-purple-400 justify-center w-full h-screen bg-slate-100 backdrop-blur-sm inset-2">
+    <div className="flex items-center bg-linear-to-bl from-blue-400 to-purple-400 justify-center w-full h-screen bg-slate-100 backdrop-blur-sm inset-2">
       <form
         onSubmit={handleSubmit}
         className=" flex flex-col rounded-sm bg-slate-100 max-w-sm w-full py-12 px-5 rounded-sm shadow-md backdrop-blur-sm"
