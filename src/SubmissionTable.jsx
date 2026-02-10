@@ -121,14 +121,14 @@ export default function SubmissionTable() {
           <button
             disabled={currentPage === 1}
             onClick={() => setCurrentPage((prev) => prev - 1)}
-            className="px-3 py-1 text-slate-400 border-none outline-none hover:bg-clip-text hover:bg-linear-to-r from-purple-500 to-blue-500 cursor-pointer transition-all duration-300 ease-in-out  disabled:opacity-30 disabled:cursor-not-allowed"
+            className="px-3 py-1 text-slate-400 border-none outline-none hover:bg-clip-text hover:text-transparent hover:bg-linear-to-r from-purple-500 to-blue-500 cursor-pointer transition-all duration-300 ease-in-out  disabled:opacity-30 disabled:cursor-not-allowed"
           >
             Prev
           </button>
           <button
             disabled={currentPage === totalPages || totalPages === 0}
             onClick={() => setCurrentPage((prev) => prev + 1)}
-            className="px-3 py-2 hover:bg-blue-900 cursor-pointer transition-all duration-300 ease-in-out  border rounded disabled:cursor-not-allowed  disabled:opacity-30 text-black"
+            className="px-3 py-1 text-slate-400 border-none outline-none hover:bg-clip-text hover:text-transparent hover:bg-linear-to-r from-purple-500 to-blue-500 cursor-pointer transition-all duration-300 ease-in-out  disabled:opacity-30 disabled:cursor-not-allowed"
           >
             Next
           </button>
