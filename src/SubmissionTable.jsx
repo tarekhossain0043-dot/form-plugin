@@ -87,7 +87,7 @@ export default function SubmissionTable() {
                   <td className="p-3">{item.name}</td>
                   <td className="p-3">{item.email}</td>
                   <td className="p-3">"{item.message}"</td>
-                  <td className="p-3 text-right">
+                  <td className="p-3 text-left">
                     <button
                       onClick={() => handleResend(item.id)}
                       className="bg-blue-500 truncate hover:bg-blue-600 text-white px-3 py-1 rounded text-sm font-semibold transition"
@@ -121,7 +121,7 @@ export default function SubmissionTable() {
           <button
             disabled={currentPage === 1}
             onClick={() => setCurrentPage((prev) => prev - 1)}
-            className="px-3 py-1 bg-gray-100 hover:bg-blue-900 border rounded  disabled:opacity-30 disabled:cursor-not-allowed text-black"
+            className="px-3 py-1 text-slate-400 border-none outline-none hover:bg-clip-text hover:bg-linear-to-r from-purple-500 to-blue-500 cursor-pointer transition-all duration-300 ease-in-out  disabled:opacity-30 disabled:cursor-not-allowed"
           >
             Prev
           </button>
