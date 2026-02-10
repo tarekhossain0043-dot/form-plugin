@@ -112,7 +112,7 @@ export default function SubmissionTable() {
 
       {/* Pagination Controls */}
       <div className="flex justify-between items-center mt-6">
-        <span className="text-sm text-gray-500 italic">
+        <span className="px-3 py-1 text-slate-600 border-none outline-none hover:bg-clip-text hover:text-transparent hover:bg-linear-to-r from-purple-500 to-blue-500 cursor-pointer transition-all duration-300 ease-in-out  disabled:opacity-30 disabled:cursor-not-allowed">
           Showing {filteredData.length > 0 ? indexOfFirstItem + 1 : 0} to{" "}
           {Math.min(indexOfLastItem, filteredData.length)} of{" "}
           {filteredData.length} entries
