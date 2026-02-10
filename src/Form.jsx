@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import axios from "axios";
-
+import "react-toastify/dist/ReactToastify.css";
+import { toast } from "react-toastify";
 const Form = () => {
   const [formData, setFormData] = useState({
     name: "",
@@ -8,6 +9,11 @@ const Form = () => {
     message: "",
   });
   console.log(formData);
+  const showToastMessage = () => {
+    toast.success("form submitted successfully!", {
+      position: "bottom-right",
+    });
+  };
 
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
@@ -19,6 +25,7 @@ const Form = () => {
     e.preventDefault();
     setStatus("Sending...");
     setIsSucces(false);
+    showToastMessage();
     try {
       const res = await axios.post(
         "http://form-plugin.local/wp-json/form_plugin/v1/form/",

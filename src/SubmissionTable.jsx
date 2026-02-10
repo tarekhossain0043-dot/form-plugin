@@ -117,7 +117,7 @@ export default function SubmissionTable() {
           {Math.min(indexOfLastItem, filteredData.length)} of{" "}
           {filteredData.length} entries
         </span>
-        <div className="flex gap-2 relative after:absolute after:top-1/2 after:left-1/2 after:-translate-1/2 w-px h-5 rotate-45 bg-linear-to-r from-blue-600 to-purple-600 after:content-['']">
+        <div className="flex gap-2 relative after:absolute after:top-1/2 after:left-1/2 after:-translate-1/2 w-px h-5 after:rotate-45 bg-linear-to-r from-blue-600 to-purple-600 after:content-['']">
           <button
             disabled={currentPage === 1}
             onClick={() => setCurrentPage((prev) => prev - 1)}
