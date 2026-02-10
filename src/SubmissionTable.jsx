@@ -57,7 +57,7 @@ export default function SubmissionTable() {
           <input
             type="text"
             placeholder="Search anythings..."
-            className="w-full px-3 py-4 border-none shadow-sm cursor-pointer transition-all duration-300 ease-in-out rounded-sm focus:outline-none focus:ring-1 focus:ring-blue-500 text-black"
+            className="w-full px-3 py-7 border-none shadow-sm cursor-pointer transition-all duration-300 ease-in-out rounded-sm focus:outline-none focus:ring-1 focus:ring-blue-400 bg-clip-text text-transparent bg-linear-to-br from-pink-300 to-blue-400"
             onChange={(e) => {
               setSearchTerm(e.target.value);
               setCurrentPage(1);
